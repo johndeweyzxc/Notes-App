@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/home2">
+
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.johndeweydev.notesapp.fragments.home.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_updateNote"
+            app:destination="@id/updateNote" />
+        <action
+            android:id="@+id/action_home2_to_createNote"
+            app:destination="@id/createNote" />
+    </fragment>
+    <fragment
+        android:id="@+id/createNote"
+        android:name="com.johndeweydev.notesapp.fragments.CreateNote"
+        android:label="fragment_create_note"
+        tools:layout="@layout/fragment_create_note" />
+    <fragment
+        android:id="@+id/updateNote"
+        android:name="com.johndeweydev.notesapp.fragments.UpdateNote"
+        android:label="fragment_update_note"
+        tools:layout="@layout/fragment_update_note" >
+        <argument
+            android:name="currentNote"
+            app:argType="com.johndeweydev.notesapp.models.Note" />
+    </fragment>
+</navigation>

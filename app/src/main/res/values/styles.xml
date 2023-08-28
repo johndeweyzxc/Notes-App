@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ToolBarTheme">
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <style name="FabTheme">
+        <item name="tintMode">@color/onPrimary</item>
+        <item name="android:backgroundTint">@color/primary</item>
+    </style>
+
+    <style name="InputTheme">
+        <item name="colorOnSurface">@color/primaryDark</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ButtonTheme">
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="CardItemTheme">
+        <item name="android:backgroundTint">@color/onPrimary</item>
+    </style>
+
+    <style name="CardItemTextTheme">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+</resources>
