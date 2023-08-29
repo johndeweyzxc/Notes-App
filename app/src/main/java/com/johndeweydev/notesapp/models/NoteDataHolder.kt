@@ -1,6 +1,6 @@
 package com.johndeweydev.notesapp.models
 
-data class NoteRepository<model> (
+data class NoteDataHolder<model> (
     val dataModel: model?,
     val statusCode: Int,
 )

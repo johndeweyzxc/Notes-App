@@ -10,12 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.johndeweydev.notesapp.databinding.FragmentCreateNoteBinding
 import com.johndeweydev.notesapp.models.requestModels.NoteUploadRequest
-import com.johndeweydev.notesapp.viewmodels.NotesViewModel
+import com.johndeweydev.notesapp.viewmodels.DefaultNotesViewModel
 
 class CreateNote : Fragment() {
 
     private lateinit var binding: FragmentCreateNoteBinding
-    private lateinit var notesViewModel: NotesViewModel
+    private lateinit var defaultNotesViewModel: DefaultNotesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +32,7 @@ class CreateNote : Fragment() {
             Navigation.findNavController(binding.root).popBackStack()
         }
 
-        notesViewModel = ViewModelProvider(requireActivity())[NotesViewModel::class.java]
+        defaultNotesViewModel = ViewModelProvider(requireActivity())[DefaultNotesViewModel::class.java]
 
         binding.inputLayoutTitle.setEndIconOnClickListener {
             binding.inputTitle.text?.clear()
@@ -57,13 +57,13 @@ class CreateNote : Fragment() {
             description = binding.inputDescription.text.toString()
         }
         val noteUploadRequest = NoteUploadRequest(title, description)
-        val previousSize = notesViewModel.allNotes.value?.size
+        val previousSize = defaultNotesViewModel.allNotes.value?.size
 
-        notesViewModel.allNotes.observe(viewLifecycleOwner) {
+        defaultNotesViewModel.allNotes.observe(viewLifecycleOwner) {
             if (it?.size == previousSize?.plus(1)) {
                 Navigation.findNavController(binding.root).popBackStack()
             }
         }
-        notesViewModel.uploadNote(noteUploadRequest)
+        defaultNotesViewModel.uploadNote(noteUploadRequest)
     }
 }

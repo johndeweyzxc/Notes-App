@@ -13,12 +13,12 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.johndeweydev.notesapp.databinding.FragmentUpdateNoteBinding
 import com.johndeweydev.notesapp.models.requestModels.NoteUpdateRequest
-import com.johndeweydev.notesapp.viewmodels.NotesViewModel
+import com.johndeweydev.notesapp.viewmodels.DefaultNotesViewModel
 
 class UpdateNote : Fragment() {
 
     private lateinit var binding: FragmentUpdateNoteBinding
-    private lateinit var notesViewModel: NotesViewModel
+    private lateinit var defaultNotesViewModel: DefaultNotesViewModel
     private val args by navArgs<UpdateNoteArgs>()
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class UpdateNote : Fragment() {
         binding.appBar.setNavigationOnClickListener {
             Navigation.findNavController(binding.root).popBackStack()
         }
-        notesViewModel = ViewModelProvider(requireActivity())[NotesViewModel::class.java]
+        defaultNotesViewModel = ViewModelProvider(requireActivity())[DefaultNotesViewModel::class.java]
         binding.inputTitle.setText(args.currentNote.title)
         binding.inputDescription.setText(args.currentNote.description)
 
@@ -75,7 +75,7 @@ class UpdateNote : Fragment() {
         val noteUpdateRequest = NoteUpdateRequest(noteId, title, description)
         val previousDateOfUpdatedAt = args.currentNote.dateInfo.updated_at
 
-        notesViewModel.allNotes.observe(viewLifecycleOwner) {
+        defaultNotesViewModel.allNotes.observe(viewLifecycleOwner) {
             if (it != null) {
                 val newDateForUpdatedAt = it[noteId]?.dateInfo?.updated_at
 
@@ -87,7 +87,7 @@ class UpdateNote : Fragment() {
                 }
             }
         }
-        notesViewModel.updateNote(args.currentNote, noteUpdateRequest)
+        defaultNotesViewModel.updateNote(args.currentNote, noteUpdateRequest)
     }
 
     private fun deleteUser() {
@@ -95,7 +95,7 @@ class UpdateNote : Fragment() {
 
         val previousDateOfDeletedAt = args.currentNote.dateInfo.deleted_at
         val noteId = args.currentNote.id
-        notesViewModel.allNotes.observe(viewLifecycleOwner) {
+        defaultNotesViewModel.allNotes.observe(viewLifecycleOwner) {
             if (it != null) {
                 val newDateForDeletedAt = it[noteId]?.dateInfo?.deleted_at
                 if (previousDateOfDeletedAt == null && newDateForDeletedAt != null) {
@@ -105,7 +105,7 @@ class UpdateNote : Fragment() {
         }
 
         builder.setPositiveButton("Yes") { _, _ ->
-            notesViewModel.deleteNote(noteId)
+            defaultNotesViewModel.deleteNote(noteId)
         }
         builder.setNegativeButton("No") { _, _ ->
 

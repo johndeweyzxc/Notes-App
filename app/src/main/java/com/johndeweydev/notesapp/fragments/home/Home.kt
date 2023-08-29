@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.johndeweydev.notesapp.R
 import com.johndeweydev.notesapp.databinding.FragmentHomeBinding
 import com.johndeweydev.notesapp.models.Note
-import com.johndeweydev.notesapp.viewmodels.NotesViewModel
+import com.johndeweydev.notesapp.viewmodels.DefaultNotesViewModel
 
 class Home : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var notesViewModel: NotesViewModel
+    private lateinit var defaultNotesViewModel: DefaultNotesViewModel
     private lateinit var itemListAdapter: NoteAdapter
 
     override fun onCreateView(
@@ -36,19 +36,19 @@ class Home : Fragment() {
             Navigation.findNavController(binding.root).navigate(R.id.action_home2_to_createNote)
         }
 
-        notesViewModel = ViewModelProvider(requireActivity())[NotesViewModel::class.java]
+        defaultNotesViewModel = ViewModelProvider(requireActivity())[DefaultNotesViewModel::class.java]
 
         itemListAdapter = NoteAdapter()
         binding.recyclerView.adapter = itemListAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        notesViewModel.allNotes.observe(viewLifecycleOwner) {
+        defaultNotesViewModel.allNotes.observe(viewLifecycleOwner) {
             handleUpdateFromLiveData(it)
         }
     }
 
     private fun handleUpdateFromLiveData(it: MutableMap<Int, Note>?) {
-        val code = notesViewModel.currentHttpStatusCode
+        val code = defaultNotesViewModel.currentHttpStatusCode
         if (code == 200 || code == 201) {
             for ((_, value) in it!!) {
                 itemListAdapter.appendData(value)

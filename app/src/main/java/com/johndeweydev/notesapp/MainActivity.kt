@@ -7,22 +7,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.johndeweydev.notesapp.databinding.ActivityMainBinding
-import com.johndeweydev.notesapp.repository.NotesRepository
-import com.johndeweydev.notesapp.viewmodels.NotesViewModel
+import com.johndeweydev.notesapp.repository.DefaultNotesRepository
+import com.johndeweydev.notesapp.viewmodels.DefaultNotesViewModel
 import com.johndeweydev.notesapp.viewmodels.NotesViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var notesViewModel: NotesViewModel
+    private lateinit var defaultNotesViewModel: DefaultNotesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val repository = NotesRepository()
+        val repository = DefaultNotesRepository()
         val notesViewModelFactory = NotesViewModelFactory(repository)
-        notesViewModel = ViewModelProvider(
-            this, notesViewModelFactory)[NotesViewModel::class.java]
+        defaultNotesViewModel = ViewModelProvider(
+            this, notesViewModelFactory)[DefaultNotesViewModel::class.java]
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
