@@ -36,3 +36,11 @@ Then in NotesApp/app/src/main/java/com/johndeweydev/notesapp/utils/Constants.kt 
 ## Generate a keystore 
 
 For more information on how to generate a keystore please visit https://developer.android.com/studio/publish/app-signing
+
+## Home page
+
+![Home!](/pictures/home.jpg)
+
+## Create note page
+
+![Create!](/pictures/create.jpg)
